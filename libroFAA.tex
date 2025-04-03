@@ -1,0 +1,118 @@
+\documentclass{book}
+\usepackage[spanish]{babel}
+\usepackage{mathtools}
+\title{El libro de FAA}	
+\date{}
+\author{Jesús García Gutiérrez}
+\begin{document}
+	\maketitle{}
+	\chapter{Relación de recurrencia}
+	\section{Ejercicio del 02/04/2025}
+	%Source: https://tex.stackexchange.com/questions/365953/how-do-i-define-a-piecewise-function-in-latex
+	\paragraph{Hallar la eficiencia de un algoritmo dado. Supongamos que ya nos dan la función a trozos del T(n).}
+	\[ T(n) = 	\begin{cases} 
+					1 & n\leq 1 \\
+					T(\frac{n}{2}) + 2 & n > 1 
+				\end{cases}
+       \]
+       \paragraph{Primero aislamos la relación de recurrencia. Las relaciones de recurrencia tienen en la parte derecha de la igualdad una o más T, a diferencia de los casos base, que no tienen ninguna T en dicha parte.}
+      \begin{equation}
+	      T(n) = T(\frac{n}{2}) + 2  
+      \end{equation}
+      \paragraph{En este caso, podemos aplicar tanto el método de expansión de recurrencia como el teorema maestro. Esto es así porque solo hay una T en la parte derecha de la igualdad. Si hubiera más de una T en dicha parte, no podríamos aplicar ninguno de estos métodos.}
+      \subsection{Método de expansión de recurrencia}
+      \paragraph{El método de expansión de recurrencia consiste en hallar el tiempo para problemas cada vez más pequeños, y calcular el T(n) utilizando cada uno de estos hallazgos.}
+      \paragraph{Si nos fijamos en la ecuación 1.1, vemos $T(\frac{n}{2})$. ¡Vamos a hallarlo usando T(n)!}
+	\begin{equation}	
+		T(\frac{n}{2}) = T(\frac{(\frac{n}{2})}{2}) + 2 \nonumber
+	\end{equation}	
+	\begin{equation}	
+		T(\frac{n}{2}) = T(\frac{n}{4}) + 2 \nonumber 
+	\end{equation}	
+	\paragraph{Listo, hemos desarrollado $T(\frac{n}{2})$. Ahora podemos sustituir la expresión que hemos hallado en la ecuación 1.1.}
+	\begin{equation}	
+		T(n) = (T(\frac{n}{4}) + 2) + 2 \nonumber 
+	\end{equation}	
+	\begin{equation}	
+		T(n) = T(\frac{n}{4}) + 4 
+	\end{equation}	
+	\paragraph{Perfecto, la ecuación 1.2 es una nueva fórmula para el T(n).}
+	\paragraph{Ahora solo tenemos que seguir el mismo procedimiento que antes, hasta que veamos un patrón claro y podamos escribirlo en una ecuación. ¡Vamos con el $T(\frac{n}{4})$ que aparece en la ecuación 1.2!}
+	\begin{equation}	
+		T(\frac{n}{4}) = T(\frac{(\frac{n}{4})}{2}) + 2 \nonumber 
+	\end{equation}
+	\begin{equation}
+		T(\frac{n}{4}) = T(\frac{n}{8}) + 2 \nonumber 
+	\end{equation}
+	\paragraph{Listo, sustituimos en la ecuación 1.2.}
+	\begin{equation}
+		T(n) = (T(\frac{n}{8}) + 2) + 4 \nonumber  
+	\end{equation}
+	\begin{equation}
+		T(n) = T(\frac{n}{8}) + 6 
+	\end{equation}
+	\paragraph{Ya lo vas pillando, ¡a por el $T(\frac{n}{8})$!}
+	\begin{equation}
+		T(\frac{n}{8}) = T(\frac{(\frac{n}{8})}{2}) + 2 \nonumber 
+	\end{equation}
+	\begin{equation}
+		T(\frac{n}{8}) = T(\frac{n}{16}) + 2 \nonumber 
+	\end{equation}	
+	\paragraph{Sustituimos $T(\frac{n}{8})$ en la ecuación 1.3.}
+	\begin{equation}
+		T(n) = (T(\frac{n}{16}) + 2) + 6 \nonumber  
+	\end{equation}	
+	\begin{equation}
+		T(n) = T(\frac{n}{16}) + 8 
+	\end{equation}	
+	\paragraph{Ya hemos hallado el T(n) utilizando varios subproblemas. Si nos fijamos en las ecuaciones 1.1, 1.2, 1.3 y 1.4, ¿veis el patrón? Vamos a escribirlo utilizando una variable llamada i.}
+	\begin{equation}
+		T(n) = T(\frac{n}{2^i}) + 2 \cdot i 
+	\end{equation}
+	\paragraph{Estupendo, la ecuación 1.5 es muy bonita y parece que ya somos informáticos teóricos cum laude, pero ocurre una desgracia: no está solo en función de n, también está en función de i. Tenemos que transformar i en n de algún modo.}
+	\paragraph{En la ecuación 1.5 fijémonos en la expresión $T(\frac{n}{2^i})$. Solo tenemos que igualar el paréntesis al valor de n que sea caso base. Si volvemos a la función a trozos, vemos que el caso base tiene $n=1$, y por tanto podemos escribir lo siguiente.}
+	\begin{equation}
+		\frac{n}{2^i} = 1 \nonumber 
+	\end{equation}
+	\paragraph{Podríamos pensar que $n=0$ es también un caso base, pero no trabajaremos nunca con problemas de tamaño igual a cero. Por eso ponemos 1 y no 0 en la igualdad. Seguimos desarrollando y aplicando la idea de logaritmo.}
+	\begin{equation}
+	   	n = 2^i \nonumber 
+	\end{equation}
+	\begin{equation}
+		\log_{2}(n) = i \nonumber 
+	\end{equation}
+	\begin{equation}
+	   	i = \log_{2}(n) \nonumber 
+	\end{equation}
+	\paragraph{Listo, tenemos i en función de n. Sustituimos la i en la ecuación 1.5.}
+	%Source: https://tex.stackexchange.com/questions/475687/how-to-write-pow-math
+	\begin{equation}
+		T(n) = T(\frac{n}{2^\mathrm{\log_{2}(n)}}) + 2 \cdot \log_{2}(n)  \nonumber 
+	\end{equation}
+	\paragraph{El denominador se puede seguir simplificando matemáticamente.}
+	\begin{equation}
+		2^\mathrm{\log_{2}(n)} = n^\mathrm{\log_{2}(2)} \nonumber 
+	\end{equation}
+	\begin{equation}
+		2^\mathrm{\log_{2}(n)} = n^1 \nonumber 
+	\end{equation}
+	\paragraph{Maravilloso, ahora el denominador es simplemente n. Volvemos a donde estábamos antes.}
+	\begin{equation}
+		T(n) = T(\frac{n}{n}) + 2 \cdot \log_{2}(n) \nonumber 
+	\end{equation}
+	\begin{equation}
+		T(n) = T(1) + 2 \cdot \log_{2}(n) \nonumber 
+	\end{equation}
+	\paragraph{Sustituimos T(1), sabiendo por la función a trozos que $T(1) = 1$}
+	\begin{equation}
+		T(n) = 1 + 2 \cdot \log_{2}(n) \nonumber 
+	\end{equation}
+	\begin{equation}
+		T(n) = 2 \cdot \log_{2}(n) + 1 
+	\end{equation}
+	\paragraph{Listo, qué bonita nos ha quedado la fórmula 1.6. Esta nos da el número de operaciones elementales dada una n, y no tenemos que hacer tiempos de otros subproblemas como ocurría con la relación de recurrencia originalmente.}
+	\paragraph{También podemos hablar ya del orden de complejidad. Podemos ver que...}
+	\begin{equation}
+		T(n) \in O(\log_{2}(n)) \nonumber
+	\end{equation}		
+\end{document}
