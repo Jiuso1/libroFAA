@@ -6,6 +6,38 @@
 \author{Jesús García Gutiérrez}
 \begin{document}
 	\maketitle{}
+	\chapter{Operación elemental}
+	\paragraph{Una operación elemental es una operación que tarda \textit{t} unidades de tiempo. Siempre tarda \textit{t}, sin importar cuándo la hagamos.}
+	\paragraph{Si consideramos la suma como una operación elemental, el ordenador tardará \textit{t} unidades de tiempo en hacer una. Hacer dos sumas le tomaría $2 \cdot t$ unidades de tiempo. Hacer n sumas le tomaría $n \cdot t$ unidades de tiempo.}	
+	\paragraph{Así,  tenemos una manera sencilla de calcular el tiempo que tardará el ordenador en hacer \textit{n} sumas. Realmente, el ordenador no tarda un tiempo exacto \textit{t} en hacer una suma (puede variar por circunstancias), pero esta simplificación nos hace posible analizar los algoritmos sin preocuparnos de detalles de software o de hardware.}
+	\paragraph{Si también definimos la multiplicación como una operación elemental, esto significa que el ordenador también tardará \textit{t} unidades de tiempo en hacer una multiplicación. Podemos decir entonces lo siguiente.}
+      \begin{equation}
+	      t\textsubscript{suma} = t\textsubscript{multiplicacion} = t
+      \end{equation}	
+      \paragraph{No solo consideraremos la suma y la multiplicación como operaciones elementales. Consideraremos como operaciones elementales todas las operaciones de la siguiente tabla.}
+      \paragraph{}
+      \begin{center}
+	      \begin{tabular}{|c|l|l|}
+	      	\hline
+	      	Suma \\
+	      	\hline
+	      	Resta \\
+	      	\hline
+	      	Multiplicación \\
+	      	\hline
+	      	División \\
+	      	\hline
+	      	Módulo \\
+	      	\hline
+	      	Asignación \\
+	      	\hline
+	      	Llamada a una función \\
+	      	\hline
+	      	Acceso a un elemento del array  \\
+	      	\hline
+	      \end{tabular}
+      \end{center}
+      \paragraph{El ordenador tarda \textit{t} unidades de tiempo en realizar cualquiera de estas operaciones.}
 	\chapter{Relación de recurrencia}
 	\section{Ejercicio del 02/04/2025}
 	%Source: https://tex.stackexchange.com/questions/365953/how-do-i-define-a-piecewise-function-in-latex
